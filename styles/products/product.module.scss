@@ -1,0 +1,21 @@
+.product {
+  width: 100%;
+  max-width: 320px;
+  box-shadow: 0 4px 8px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
+  border-radius: 10px;
+  .image {
+    width: 320px;
+    height: 200px;
+    position: relative;
+  }
+  .info {
+    padding: 0 8px;
+    .name_price {
+      display: flex;
+      justify-content: space-between;
+    }
+    button {
+      margin: 0 0 10px 0;
+    }
+  }
+}
