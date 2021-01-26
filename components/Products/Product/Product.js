@@ -3,8 +3,11 @@ import Image from "next/image";
 
 // Styles
 import styles from "../../../styles/products/product.module.scss";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/actions/addToCart/addToCart";
 
 const Product = ({ product }) => {
+  const dispatch = useDispatch();
   return (
     <div className={styles.product}>
       <div className={styles.image}>
@@ -22,7 +25,9 @@ const Product = ({ product }) => {
           <h2>{product.price.formatted_with_symbol}</h2>
         </div>
         <p dangerouslySetInnerHTML={{ __html: product.description }} />
-        <button>Add to Cart</button>
+        <button onClick={() => dispatch(addToCart(product.id, 1))}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );
