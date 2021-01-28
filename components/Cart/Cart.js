@@ -7,12 +7,12 @@ const cart = () => {
     <div>
       These are your cart items.
       <p>Hello</p>
-      {/* {cartItems.line_items.map((item) => (
+      {cartItems?.line_items?.map((item) => (
         <div>
           <h1>{item.product_name}</h1>
         </div>
       ))}
-      {console.log(cartItems)} */}
+      {console.log(cartItems)}
     </div>
   );
 };

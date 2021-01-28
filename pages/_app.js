@@ -1,14 +1,10 @@
 import "../styles/globals.css";
+
 import { createWrapper } from "next-redux-wrapper";
-import { store, persistor } from "../redux/store";
-import { PersistGate } from "redux-persist/integration/react";
+import store from "../redux/store";
 
 const MyApp = ({ Component, pageProps }) => {
-  return (
-    <Component {...pageProps} store={store}>
-      <PersistGate persistor={persistor} />
-    </Component>
-  );
+  return <Component {...pageProps} store={store} />;
 };
 
 const makeStore = () => store;

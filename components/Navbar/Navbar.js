@@ -29,7 +29,7 @@ const Navbar = () => {
                   <a>Shopping Cart</a>
                 </Link>
               </li>
-              <span>{console.log(cartItems.total_items)}</span>
+              <span>{cartItems.total_items}</span>
             </div>
           </ul>
         </div>
