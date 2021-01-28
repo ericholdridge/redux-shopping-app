@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // Redux Actions
 import { fetchProducts } from "../redux/actions/fetchProducts/fetchProducts";
@@ -10,21 +10,20 @@ import Products from "../components/Products/Products";
 
 const Home = () => {
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCart());
   }, []);
 
   return (
-    <div>
+    <>
       <Head>
-        <title>Create Next App</title>
+        <title>Redux Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
       <Products />
-    </div>
+    </>
   );
 };
 

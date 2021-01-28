@@ -1,10 +1,9 @@
-import React from "react";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../../redux/actions/addToCart/addToCart";
 
 // Styles
 import styles from "../../../styles/products/product.module.scss";
-import { useDispatch } from "react-redux";
-import { addToCart } from "../../../redux/actions/addToCart/addToCart";
 
 const Product = ({ product }) => {
   const dispatch = useDispatch();

@@ -1,11 +1,11 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import Link from "next/link";
 // Styles
 import styles from "../../styles/navbar/navbar.module.scss";
 
 const Navbar = () => {
   const cartItems = useSelector((state) => state.cart);
-  console.log(cartItems);
   return (
     <nav className={styles.navbar}>
       <div className={`container ${styles.container}`}>
@@ -13,7 +13,9 @@ const Navbar = () => {
         <div>
           <ul>
             <li>
-              <a href="">Home</a>
+              <Link href="/">
+                <a>Home</a>
+              </Link>
             </li>
             <li>
               <a href="">About</a>
@@ -21,11 +23,15 @@ const Navbar = () => {
             <li>
               <a href="">Services</a>
             </li>
+            <div className={styles.cartItems}>
+              <li>
+                <Link href="/cart">
+                  <a>Shopping Cart</a>
+                </Link>
+              </li>
+              <span>{console.log(cartItems.total_items)}</span>
+            </div>
           </ul>
-          <div className={styles.cartItems}>
-            <span>Shopping Cart</span>
-            <span>{cartItems.total_items}</span>
-          </div>
         </div>
       </div>
     </nav>
