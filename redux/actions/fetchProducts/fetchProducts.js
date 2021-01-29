@@ -5,7 +5,7 @@ export const fetchProducts = () => {
     const response = await commerce.products.list();
     dispatch({
       type: "FETCH_PRODUCTS",
-      payload: response.data,
+      payload: response
     });
   };
 };

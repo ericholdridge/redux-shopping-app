@@ -1,11 +1,17 @@
 import React from "react";
-import { useSelector } from "react-redux";
 import Link from "next/link";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCart } from "../../redux/actions/fetchCart/fetchCart";
 // Styles
 import styles from "../../styles/navbar/navbar.module.scss";
 
 const Navbar = () => {
-  const cartItems = useSelector((state) => state.cart);
+  const { cart } = useSelector((state) => state.cart);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCart());
+  }, [cart]);
   return (
     <nav className={styles.navbar}>
       <div className={`container ${styles.container}`}>
@@ -29,7 +35,7 @@ const Navbar = () => {
                   <a>Shopping Cart</a>
                 </Link>
               </li>
-              <span>{cartItems.total_items}</span>
+              <span>{cart.total_items}</span>
             </div>
           </ul>
         </div>

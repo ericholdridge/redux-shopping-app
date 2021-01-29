@@ -1,10 +1,11 @@
-import { cart } from "../../state/cartState";
+import { initialState } from "../../state/cartState";
 
-export const fetchCartReducer = (state = cart, action) => {
+export const fetchCartReducer = (state = initialState, action) => {
   switch (action.type) {
     case "FETCH_CART":
-      console.log(action.payload);
-      return action.payload
+      return {...state, cart: action.payload}
+    case "UPDATE_QUANTITY":
+      return { ...state, cart: action.payload.cart };
     default:
       return state;
   }

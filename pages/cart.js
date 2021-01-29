@@ -1,5 +1,4 @@
 import Head from "next/head";
-import {useSelector } from "react-redux";
 import Navbar from "../components/Navbar/Navbar";
 import Cart from "../components/Cart/Cart";
 

@@ -1,1 +1,3 @@
-export const cart = {};
+export const initialState = {
+  cart: {},
+};

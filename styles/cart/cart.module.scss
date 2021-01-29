@@ -1,0 +1,25 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  .cartCard {
+    width: 100%;
+    max-width: 320px;
+    border: 1px solid red;
+    .cartQuantity {
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      p {
+        margin: 0 10px;
+      }
+      span {
+        cursor: pointer;
+      }
+    }
+  }
+  .itemPrice {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
