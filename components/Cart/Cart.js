@@ -1,49 +1,38 @@
-import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../redux/actions/fetchCart/fetchCart";
-import { updateQuantity } from "../../redux/actions/updateQuantity/updateQuanity";
-
-// Styles
-import styles from "../../styles/cart/cart.module.scss";
+import CartItem from "./CartItem/CartItem";
+import Link from "next/link"
 
 const cart = () => {
-  const {cart} = useSelector((state) => state.cart);
-
+  const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchCart());
   }, []);
 
-
   return (
-    <div className={`container ${styles.container}`}>
-      {cart?.line_items?.map((item) => (
-        <div key={item.id} className={styles.cartCard}>
-          <div className={styles.itemPrice}>
-            <h1>{item.name}</h1>
-            <span>{item.price.formatted_with_symbol}</span>
-          </div>
-          <div className={styles.cartQuantity}>
-            <span
-              onClick={() =>
-                dispatch(updateQuantity(item.id, item.quantity - 1))
-              }
-            >
-              -
-            </span>
-            <p>{item.quantity}</p>
-            <span
-              onClick={() =>
-                dispatch(updateQuantity(item.id, item.quantity + 1))
-              }
-            >
-              +
-            </span>
-          </div>
-          <button>Remove Item</button>
+    <div className="container mx-auto py-24">
+      <div className="flex justify-between mb-10 items-center">
+        <div className="inline-flex flex-col font-medium">
+          <h1>Total Items: {cart.total_items}</h1>
+          <span className="inline-block">
+            Total Price: {cart?.subtotal?.formatted_with_symbol}
+          </span>
         </div>
-      ))}
+        <div className="flex w-56 justify-between">
+          <Link href="/checkout">
+            <a className="bg-green-400 px-2 py-2 font-medium rounded border-none">
+              Checkout
+            </a>
+          </Link>
+          <button className="bg-red-400 px-2 py-2 font-medium rounded border-none">
+            Remove Items
+          </button>
+        </div>
+      </div>
+      <CartItem cart={cart} />
     </div>
   );
 };

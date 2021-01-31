@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "tailwindcss/tailwind.css";
 
 import { createWrapper } from "next-redux-wrapper";
 import store from "../redux/store";

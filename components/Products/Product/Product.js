@@ -2,31 +2,40 @@ import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../../redux/actions/addToCart/addToCart";
 
-// Styles
-import styles from "../../../styles/products/product.module.scss";
-
 const Product = ({ product }) => {
   const dispatch = useDispatch();
   return (
-    <div className={styles.product}>
-      <div className={styles.image}>
+    <div key={product.id} className="shadow-xl rounded-md">
+      <div className="rounded-md relative grid justify-center bg-white">
         <Image
           src={product.media.source}
-          alt="Picture of the author"
-          layout="fill"
-          objectFit="contain"
-          quality={100}
+          alt={product.name}
+          width="180"
+          height="200"
+          className="object-contain"
         />
       </div>
-      <div className={styles.info}>
-        <div className={styles.name_price}>
-          <h2>{product.name}</h2>
-          <h2>{product.price.formatted_with_symbol}</h2>
+      <div className="wrapper p-3">
+        <div className="flex justify-between items-center">
+          <h1 className="text-gray-900 font-bold text-2xl">{product.name}</h1>
+          <h1 className="text-gray-700 font-bold text-xl">
+            {product.price.formatted_with_symbol}
+          </h1>
         </div>
-        <p dangerouslySetInnerHTML={{ __html: product.description }} />
-        <button onClick={() => dispatch(addToCart(product.id, 1))}>
-          Add to Cart
-        </button>
+        <div className="pt-3">
+          <p
+            className="text-gray-700 font-bold"
+            dangerouslySetInnerHTML={{ __html: product.description }}
+          ></p>
+        </div>
+        <div className="flex">
+          <button
+            onClick={() => dispatch(addToCart(product.id))}
+            className="ml-auto bg-black border-none mt-2 px-4 py-1 rounded text-white"
+          >
+            Add to Cart
+          </button>
+        </div>
       </div>
     </div>
   );

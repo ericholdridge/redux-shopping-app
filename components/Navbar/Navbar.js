@@ -3,42 +3,39 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../redux/actions/fetchCart/fetchCart";
-// Styles
-import styles from "../../styles/navbar/navbar.module.scss";
 
 const Navbar = () => {
   const { cart } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchCart());
-  }, [cart]);
+  }, []);
+
   return (
-    <nav className={styles.navbar}>
-      <div className={`container ${styles.container}`}>
-        <h1>ReduxShoppingApp</h1>
-        <div>
-          <ul>
-            <li>
-              <Link href="/">
-                <a>Home</a>
+    <nav className="navbar py-6 bg-black">
+      <div className="container mx-auto flex justify-between items-center">
+        <h1 className="text-white font-bold text-lg">ReduxShoppingApp</h1>
+        <ul className="flex items-center">
+          <li className="mx-4">
+            <Link href="/">
+              <a className="text-white">Home</a>
+            </Link>
+          </li>
+          <li className="mx-4">
+            <a className="text-white">About</a>
+          </li>
+          <li className="mx-4">
+            <a className="text-white">Services</a>
+          </li>
+          <div className="flex items-center">
+            <li className="mx-4">
+              <Link href="/cart">
+                <a className="text-white">Shopping Cart</a>
               </Link>
             </li>
-            <li>
-              <a href="">About</a>
-            </li>
-            <li>
-              <a href="">Services</a>
-            </li>
-            <div className={styles.cartItems}>
-              <li>
-                <Link href="/cart">
-                  <a>Shopping Cart</a>
-                </Link>
-              </li>
-              <span>{cart.total_items}</span>
-            </div>
-          </ul>
-        </div>
+            <span>{cart.total_items}</span>
+          </div>
+        </ul>
       </div>
     </nav>
   );

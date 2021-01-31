@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 // Redux Actions
 import { fetchProducts } from "../redux/actions/fetchProducts/fetchProducts";
 import { fetchCart } from "../redux/actions/fetchCart/fetchCart";
@@ -10,6 +10,7 @@ import Products from "../components/Products/Products";
 
 const Home = () => {
   const dispatch = useDispatch();
+  
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCart());
