@@ -22,7 +22,7 @@ const cart = () => {
           </span>
         </div>
         <div className="flex w-56 justify-between">
-          <Link href="/checkout">
+          <Link href="/checkout/step1">
             <a className="bg-green-400 px-2 py-2 font-medium rounded border-none">
               Checkout
             </a>

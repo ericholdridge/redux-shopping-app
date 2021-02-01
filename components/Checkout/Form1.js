@@ -1,10 +1,8 @@
 import React from "react";
-import StepIndicator from "../StepIndicator";
 
-const CheckoutForm = () => {
+const Form1 = () => {
   return (
     <div>
-      <StepIndicator />
       <form action="" className="border-2 shadow-sm inline-block mt-4">
         <div className="flex">
           <div className="flex flex-col">
@@ -21,4 +19,4 @@ const CheckoutForm = () => {
   );
 };
 
-export default CheckoutForm;
+export default Form1;
