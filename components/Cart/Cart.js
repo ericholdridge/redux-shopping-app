@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../../redux/actions/fetchCart/fetchCart";
 import CartItem from "./CartItem/CartItem";
-import Link from "next/link"
+import Link from "next/link";
+import { removeAllItems } from "../../redux/actions/removeAllItems/removeAllItems";
 
 const cart = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -27,7 +28,10 @@ const cart = () => {
               Checkout
             </a>
           </Link>
-          <button className="bg-red-400 px-2 py-2 font-medium rounded border-none">
+          <button
+            onClick={() => dispatch(removeAllItems(cart.id))}
+            className="bg-red-400 px-2 py-2 font-medium rounded border-none"
+          >
             Remove Items
           </button>
         </div>

@@ -1,12 +1,11 @@
 import { commerce } from "../../../lib/commerce";
 
-export const removeAllItems = (lineItemId) => {
-  return (dispatch) => {
-    const response = commerce.cart.delete(lineItemId);
-    console.log("Clicked");
-    // dispatch({
-    //   type: "REMOVE_ALL_ITEMS",
-    //   payload: response,
-    // });
+export const removeAllItems = () => {
+  return async (dispatch) => {
+    const response = await commerce.cart.empty();
+    dispatch({
+      type: "REMOVE_ALL_ITEMS",
+      payload: response,
+    });
   };
 };
