@@ -1,5 +1,5 @@
 import React from "react";
-import CheckoutForm from "../../components/Checkout/CheckoutForm";
+import Form1 from "../../components/Checkout/Form1";
 import Navbar from "../../components/Navbar/Navbar";
 
 const checkoutPage = () => {
@@ -7,7 +7,7 @@ const checkoutPage = () => {
     <section>
       <Navbar />
       <div className="container mx-auto pt-10">
-        <CheckoutForm />
+        <Form1 />
       </div>
     </section>
   );
