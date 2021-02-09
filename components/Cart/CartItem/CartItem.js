@@ -11,7 +11,7 @@ const CartItem = ({ cart }) => {
     <div className="grid grid-cols-3 gap-36">
       {cart?.line_items?.map((item) => (
         <div key={item.id} className="shadow-xl rounded-md">
-          <div className="rounded-md relative grid justify-center bg-white">
+          <div className="rounded-t-md relative grid justify-center bg-white">
             <Image
               src={item.media.source}
               alt={item.product_name}
@@ -20,7 +20,7 @@ const CartItem = ({ cart }) => {
               className="object-contain"
             />
           </div>
-          <div className="rounded-md p-3 bg-white">
+          <div className="rounded-b-md p-3 bg-white">
             <div className="flex justify-between items-center">
               <h1 className="text-gray-900 font-bold text-2xl">
                 {item.product_name}

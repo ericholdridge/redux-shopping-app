@@ -1,3 +1,6 @@
 export const shippingState = {
-  shipping: {},
+  shippingCountries: {},
+  shippingCountry: "",
+  shippingSubdivisions: {},
+  shippingSubdivision: "",
 };

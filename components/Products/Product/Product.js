@@ -5,7 +5,7 @@ import { addToCart } from "../../../redux/actions/addToCart/addToCart";
 const Product = ({ product }) => {
   const dispatch = useDispatch();
   return (
-    <div key={product.id} className="shadow-xl rounded-md">
+    <div key={product.id} className="shadow-xl rounded-md bg-white">
       <div className="rounded-md relative grid justify-center bg-white">
         <Image
           src={product.media.source}

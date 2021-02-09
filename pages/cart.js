@@ -4,7 +4,7 @@ import Cart from "../components/Cart/Cart";
 
 const cartPage = () => {
   return (
-    <section className="bg-gray-100 min-h-screen">
+    <section className="min-h-screen" style={{background: "#222426"}}>
       <Head>
         <title>Redux Cart</title>
         <link rel="icon" href="/favicon.ico" />

@@ -1,11 +1,15 @@
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchShippingCountries } from "../../redux/actions/shipping/fetchShippingCountries";
+import { fetchShippingSubdivisions } from "../../redux/actions/shipping/fetchShippingSubdivisions";
+import { updateShippingCode } from "../../redux/actions/shipping/updateShippingCountry";
 
 const AddressForm = ({ cart }) => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
+  const shipping = useSelector((state) => state.shipping);
+  const shippingCode = useSelector((state) => state.shipping.shippingCountry);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -14,6 +18,10 @@ const AddressForm = ({ cart }) => {
   useEffect(() => {
     dispatch(fetchShippingCountries(cart.token.id));
   }, [cart]);
+
+  useEffect(() => {
+    if (shippingCode) dispatch(fetchShippingSubdivisions(shippingCode));
+  }, [shippingCode]);
 
   return (
     <div className="container mx-auto pt-4">
@@ -106,6 +114,35 @@ const AddressForm = ({ cart }) => {
             {errors.zip && (
               <p className="text-red-400 font-bold">Zip code is required.</p>
             )}
+          </div>
+        </div>
+        <div className="flex justify-between">
+          <div className="flex flex-col w-1/2 mt-6">
+            <label htmlFor="shipping">Shipping Country*</label>
+            <select
+              value={shipping.shippingCountry}
+              onChange={(e) => dispatch(updateShippingCode(e.target.value))}
+              className="border-b-2 mt-4"
+              name="country"
+              ref={register({ required: true })}
+            >
+              {Object.keys(shipping.shippingCountries).map((country) => (
+                <option value={country}>{country}</option>
+              ))}
+            </select>
+          </div>
+          <div className="flex flex-col w-1/2 mt-6">
+            <label htmlFor="shipping">Shipping Subdivisions*</label>
+            <select
+              value={shipping.shippingSubdivision}
+              className="border-b-2 mt-4"
+              name="subdivision"
+              ref={register({ required: true })}
+            >
+              {Object.keys(shipping.shippingSubdivisions).map((subdivision) => (
+                <option value={subdivision}>{subdivision}</option>
+              ))}
+            </select>
           </div>
         </div>
         <div>

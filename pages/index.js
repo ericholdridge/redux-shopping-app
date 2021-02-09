@@ -10,21 +10,21 @@ import Products from "../components/Products/Products";
 
 const Home = () => {
   const dispatch = useDispatch();
-  
+
   useEffect(() => {
     dispatch(fetchProducts());
     dispatch(fetchCart());
   }, []);
 
   return (
-    <>
+    <section className="min-h-screen" style={{ background: "#222426" }}>
       <Head>
         <title>Redux Home</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Navbar />
       <Products />
-    </>
+    </section>
   );
 };
 

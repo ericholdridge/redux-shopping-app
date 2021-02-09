@@ -12,13 +12,13 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="navbar py-6 bg-black">
+    <nav className="navbar py-6 shadow-2xl" style={{background: "#242730"}}>
       <div className="container mx-auto flex justify-between items-center">
         <h1 className="text-white font-bold text-lg">ReduxShoppingApp</h1>
         <ul className="flex items-center">
           <li className="mx-4">
             <Link href="/">
-              <a className="text-white">Home</a>
+              <a className="text-white">Products</a>
             </Link>
           </li>
           <li className="mx-4">
@@ -30,7 +30,7 @@ const Navbar = () => {
           <div className="flex items-center">
             <li className="mx-4">
               <Link href="/cart">
-                <a className="text-white">Shopping Cart</a>
+                <a className="text-white">Cart</a>
               </Link>
             </li>
             <span>{cart.total_items}</span>
