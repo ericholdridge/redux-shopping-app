@@ -3,4 +3,7 @@ export const shippingState = {
   shippingCountry: "",
   shippingSubdivisions: {},
   shippingSubdivision: "",
+  shippingOptions: [],
+  shippingOption: {},
+  shippingFormData: {},
 };

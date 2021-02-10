@@ -1,18 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
+import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchShippingCountries } from "../../redux/actions/shipping/fetchShippingCountries";
 import { fetchShippingSubdivisions } from "../../redux/actions/shipping/fetchShippingSubdivisions";
 import { updateShippingCode } from "../../redux/actions/shipping/updateShippingCountry";
+import { fetchShippingMethods } from "../../redux/actions/shipping/fetchShippingMethods";
+import { updateShippingSubdivision } from "../../redux/actions/shipping/updateShippingDivision";
+import { fetchShippingFormData } from "../../redux/actions/shipping/fetchShippingFormData";
+import { updateShippingOption } from "../../redux/actions/shipping/updateShippingOption";
 
 const AddressForm = ({ cart }) => {
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const shipping = useSelector((state) => state.shipping);
   const shippingCode = useSelector((state) => state.shipping.shippingCountry);
+  const shippingOptions = useSelector(
+    (state) => state.shipping.shippingOptions
+  );
+
+  const options = shippingOptions.map((option) => ({
+    id: option.id,
+    label: `${option.description} - (${option.price.formatted_with_symbol})`,
+  }));
 
   const onSubmit = (data) => {
-    console.log(data);
+    dispatch(fetchShippingFormData(data));
   };
 
   useEffect(() => {
@@ -22,6 +35,17 @@ const AddressForm = ({ cart }) => {
   useEffect(() => {
     if (shippingCode) dispatch(fetchShippingSubdivisions(shippingCode));
   }, [shippingCode]);
+
+  useEffect(() => {
+    if (shipping.shippingSubdivision)
+      dispatch(
+        fetchShippingMethods(
+          cart.token.id,
+          shippingCode,
+          shipping.shippingSubdivision
+        )
+      );
+  }, [shipping.shippingSubdivision]);
 
   return (
     <div className="container mx-auto pt-4">
@@ -135,6 +159,9 @@ const AddressForm = ({ cart }) => {
             <label htmlFor="shipping">Shipping Subdivisions*</label>
             <select
               value={shipping.shippingSubdivision}
+              onChange={(e) =>
+                dispatch(updateShippingSubdivision(e.target.value))
+              }
               className="border-b-2 mt-4"
               name="subdivision"
               ref={register({ required: true })}
@@ -145,9 +172,30 @@ const AddressForm = ({ cart }) => {
             </select>
           </div>
         </div>
-        <div>
-          <button className="bg-black py-1 px-3 text-white rounded font-bold flex jusfiy-end mt-4">
-            Submit
+        <div className="flex flex-col w-1/2 mt-6">
+          <label htmlFor="shipping">Shipping Options*</label>
+          <select
+            value={shipping.shippingOption}
+            onChange={(e) => dispatch(updateShippingOption(e.target.value))}
+            className="border-b-2 mt-4"
+            name="shippingOption"
+            ref={register({ required: true })}
+          >
+            {options.map((option) => (
+              <option key={option.id} value={option.id}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div className="h-8 mt-6 flex items-center">
+          <Link href="/cart">
+            <a className="bg-black text-white rounded font-bold h-full flex items-center justify-center px-2">
+              Back to Cart
+            </a>
+          </Link>
+          <button className="bg-black ml-2 text-white rounded font-bold h-full flex items-center justify-center px-2">
+            Next
           </button>
         </div>
       </form>
