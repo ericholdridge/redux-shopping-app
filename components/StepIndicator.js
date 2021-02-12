@@ -12,7 +12,7 @@ const StepIndicator = () => {
   ];
 
   return (
-    <div className="bg-gray-100 pt-20">
+    <div className="bg-gray-100 py-20">
       <div className="flex mx-auto justify-between w-32">
         {steps.map((step, index) => (
           <Link key={index} href="/checkout/[step]" as={`${step.path}`}>

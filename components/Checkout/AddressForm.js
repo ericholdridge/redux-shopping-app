@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { useDispatch, useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { fetchShippingCountries } from "../../redux/actions/shipping/fetchShippingCountries";
@@ -11,6 +12,7 @@ import { fetchShippingFormData } from "../../redux/actions/shipping/fetchShippin
 import { updateShippingOption } from "../../redux/actions/shipping/updateShippingOption";
 
 const AddressForm = ({ cart }) => {
+  const router = useRouter();
   const { register, handleSubmit, errors } = useForm();
   const dispatch = useDispatch();
   const shipping = useSelector((state) => state.shipping);
@@ -19,13 +21,14 @@ const AddressForm = ({ cart }) => {
     (state) => state.shipping.shippingOptions
   );
 
-  const options = shippingOptions.map((option) => ({
+  const options = shipping.shippingOptions.map((option) => ({
     id: option.id,
     label: `${option.description} - (${option.price.formatted_with_symbol})`,
   }));
 
   const onSubmit = (data) => {
     dispatch(fetchShippingFormData(data));
+    router.push("/checkout/step2");
   };
 
   useEffect(() => {
@@ -155,7 +158,7 @@ const AddressForm = ({ cart }) => {
               ))}
             </select>
           </div>
-          <div className="flex flex-col w-1/2 mt-6">
+          <div className="flex flex-col w-1/2 mt-6 ml-4">
             <label htmlFor="shipping">Shipping Subdivisions*</label>
             <select
               value={shipping.shippingSubdivision}
