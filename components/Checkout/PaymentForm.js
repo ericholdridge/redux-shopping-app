@@ -1,25 +1,31 @@
-import { useSelector } from "react-redux";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Elements,
   CardElement,
   ElementsConsumer,
 } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import { handleCaptureCheckout } from "../../redux/actions/checkout/generateCheckoutToken/handleCaptureCheckout";
 
 const PaymentForm = () => {
-  const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY);
+  const [stripePromise, setStripePromise] = useState(() =>
+    loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
+  );
   const cart = useSelector((state) => state.cart);
   const shipping = useSelector((state) => state.shipping.shippingFormData);
+  const dispatch = useDispatch();
 
   const handleSubmit = async (e, elements, stripe) => {
     e.preventDefault();
-
     if (!stripe || !elements) return;
+    // Stripe.js has not loaded yet. Make sure to disable
+    // form submission until Stripe.js has loaded.
 
     const cardElement = elements.getElement(CardElement);
 
     const { error, paymentMethod } = await stripe.createPaymentMethod({
-      type: "cart",
+      type: "card",
       card: cardElement,
     });
 
@@ -47,9 +53,11 @@ const PaymentForm = () => {
           stripe: { payment_method_id: paymentMethod.id },
         },
       };
-      console.log(orderData);
+      dispatch(handleCaptureCheckout(cart.token.id, orderData));
     }
   };
+
+  // console.log(cart.cart.token?.id);
 
   return (
     <section className="min-h-screen bg-gray-100">
@@ -72,22 +80,23 @@ const PaymentForm = () => {
         </div>
         <Elements stripe={stripePromise}>
           <ElementsConsumer>
-            {(elements, stripe) => (
-              <form className="mt-2">
+            {({ elements, stripe }) => (
+              <form
+                onSubmit={(e) => handleSubmit(e, elements, stripe)}
+                className="mt-2"
+              >
                 <CardElement />
                 <div className="flex justify-between pt-4">
-                  <button className="bg-black px-4 py-1 text-white rounded">
+                  <button className="bg-black px-4 py-1 text-white rounded shadow">
                     Back
                   </button>
-                  {/* Disable the button if no stripe !stripe */}
                   <button
-                    className=""
+                    disabled={!stripe}
+                    className="bg-green-400 px-4 py-1 rounded shadow"
                     type="submit"
-                    onClick={(e) => handleSubmit(e, elements, stripe)}
                   >
                     Pay {cart.token?.live?.subtotal.formatted_with_symbol}
                   </button>
-                  {console.log(stripe)}
                 </div>
               </form>
             )}

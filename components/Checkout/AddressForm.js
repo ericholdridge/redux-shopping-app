@@ -17,9 +17,9 @@ const AddressForm = ({ cart }) => {
   const dispatch = useDispatch();
   const shipping = useSelector((state) => state.shipping);
   const shippingCode = useSelector((state) => state.shipping.shippingCountry);
-  const shippingOptions = useSelector(
-    (state) => state.shipping.shippingOptions
-  );
+  // const shippingOptions = useSelector(
+  //   (state) => state.shipping.shippingOptions
+  // );
 
   const options = shipping.shippingOptions.map((option) => ({
     id: option.id,
