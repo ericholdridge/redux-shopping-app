@@ -6,7 +6,7 @@ const checkoutPage = () => {
   return (
     <section>
       <Navbar />
-      <div className="container mx-auto pt-10">
+      <div className="container mx-auto">
         <Form1 />
       </div>
     </section>

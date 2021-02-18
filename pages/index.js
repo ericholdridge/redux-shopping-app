@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // Redux Actions
 import { fetchProducts } from "../redux/actions/fetchProducts/fetchProducts";
 import { fetchCart } from "../redux/actions/fetchCart/fetchCart";
@@ -9,6 +9,7 @@ import Navbar from "../components/Navbar/Navbar";
 import Products from "../components/Products/Products";
 
 const Home = () => {
+  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {

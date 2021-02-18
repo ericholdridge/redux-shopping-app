@@ -2,6 +2,8 @@ import { initialState } from "../../state/cartState";
 
 export const fetchCartReducer = (state = initialState, action) => {
   switch (action.type) {
+    case "ADD_TO_CART":
+      return { ...state, cart: action.payload };
     case "FETCH_CART":
       return { ...state, cart: action.payload };
     case "UPDATE_QUANTITY":
@@ -11,7 +13,7 @@ export const fetchCartReducer = (state = initialState, action) => {
     case "REMOVE_ALL_ITEMS":
       return { ...state, cart: action.payload.cart };
     case "GENERATE_CHECKOUT_TOKEN":
-      return { ...state, token: action.payload};
+      return { ...state, token: action.payload };
 
     default:
       return state;

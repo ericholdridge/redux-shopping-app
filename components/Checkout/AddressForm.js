@@ -17,9 +17,6 @@ const AddressForm = ({ cart }) => {
   const dispatch = useDispatch();
   const shipping = useSelector((state) => state.shipping);
   const shippingCode = useSelector((state) => state.shipping.shippingCountry);
-  // const shippingOptions = useSelector(
-  //   (state) => state.shipping.shippingOptions
-  // );
 
   const options = shipping.shippingOptions.map((option) => ({
     id: option.id,
@@ -153,8 +150,8 @@ const AddressForm = ({ cart }) => {
               name="country"
               ref={register({ required: true })}
             >
-              {Object.keys(shipping.shippingCountries).map((country) => (
-                <option value={country}>{country}</option>
+              {Object.keys(shipping.shippingCountries).map((country, index) => (
+                <option key={index} value={country}>{country}</option>
               ))}
             </select>
           </div>
@@ -169,8 +166,8 @@ const AddressForm = ({ cart }) => {
               name="subdivision"
               ref={register({ required: true })}
             >
-              {Object.keys(shipping.shippingSubdivisions).map((subdivision) => (
-                <option value={subdivision}>{subdivision}</option>
+              {Object.keys(shipping.shippingSubdivisions).map((subdivision, index) => (
+                <option key={index} value={subdivision}>{subdivision}</option>
               ))}
             </select>
           </div>

@@ -1,5 +1,8 @@
 import "../styles/globals.css";
 import "tailwindcss/tailwind.css";
+import "@fortawesome/fontawesome-svg-core/styles.css";
+import { config } from '@fortawesome/fontawesome-svg-core'
+config.autoAddCss = false
 
 import { createWrapper } from "next-redux-wrapper";
 import store from "../redux/store";

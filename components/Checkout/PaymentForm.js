@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import {
   Elements,
   CardElement,
@@ -9,6 +10,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { handleCaptureCheckout } from "../../redux/actions/checkout/generateCheckoutToken/handleCaptureCheckout";
 
 const PaymentForm = () => {
+  const router = useRouter();
   const [stripePromise, setStripePromise] = useState(() =>
     loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
   );
@@ -55,16 +57,16 @@ const PaymentForm = () => {
       };
       dispatch(handleCaptureCheckout(cart.token.id, orderData));
     }
+    // Take the user to the confirmation page
+    router.push("/confirmation");
   };
-
-  // console.log(cart.cart.token?.id);
 
   return (
     <section className="min-h-screen bg-gray-100">
       <div className="max-w-xl mx-auto shadow-2xl p-4 rounded-md bg-white">
         <h1 className="font-bold mb-4 text-2xl">Order Summary</h1>
-        {cart.cart?.line_items?.map((item) => (
-          <div className="py-4">
+        {cart.cart?.line_items?.map((item, index) => (
+          <div key={index} className="py-4">
             <h2 className="font-medium text-xl">{item.product_name}</h2>
             <div className="flex justify-between items-center">
               <span className="text-gray-500">Quantity: {item.quantity}</span>
