@@ -5,19 +5,23 @@ const StepIndicator = () => {
   const steps = [
     {
       path: "/checkout/step1",
+      name: "Address Form",
+      id: 1,
     },
     {
       path: "/checkout/step2",
+      name: "Checkout Form",
+      id: 2,
     },
   ];
 
   return (
     <div className="bg-gray-100 py-20">
-      <div className="flex mx-auto justify-between w-32">
-        {steps.map((step, index) => (
-          <Link key={index} href="/checkout/[step]" as={`${step.path}`}>
-            <a className="w-10 h-10 border-2 border-gray-300 bg-white shadow-xl rounded-full flex justify-center items-center">
-              {index + 1}
+      <div className="flex justify-center">
+        {steps.map((step) => (
+          <Link key={step.id} href="/checkout/[step]" as={`${step.path}`}>
+            <a className="bg-white shadow-xl flex justify-center items-center mx-2 px-2 rounded font-bold">
+              {step.name}
             </a>
           </Link>
         ))}

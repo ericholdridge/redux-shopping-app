@@ -22,7 +22,7 @@ const Form1 = () => {
         <FontAwesomeIcon
           icon={faCircleNotch}
           spin
-          size="2x"
+          size="lg"
           className="block"
         />
       )}

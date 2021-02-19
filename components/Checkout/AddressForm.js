@@ -48,14 +48,14 @@ const AddressForm = ({ cart }) => {
   }, [shipping.shippingSubdivision]);
 
   return (
-    <div className="container mx-auto pt-4">
+    <div className="container mx-auto sm:pt-4 px-4 sm:px-0">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="rounded mx-auto shadow-xl p-4 max-w-3xl bg-white"
       >
         <h1 className="pt-4 pb-6 font-bold text-lg">Shipping information</h1>
-        <div className="flex max-w-3xl">
-          <div className="flex flex-col w-1/2">
+        <div className="flex max-w-3xl flex-col sm:flex-row">
+          <div className="flex flex-col w-full sm:w-1/2">
             <label htmlFor="firstName">First Name*</label>
             <input
               className="border-b-2"
@@ -67,7 +67,7 @@ const AddressForm = ({ cart }) => {
               <p className="text-red-400 font-bold">First name is required.</p>
             )}
           </div>
-          <div className="flex flex-col ml-4 w-1/2">
+          <div className="flex flex-col sm:ml-4 w-full sm:w-1/2 mt-4 sm:mt-0">
             <label htmlFor="lastName">Last Name*</label>
             <input
               className="border-b-2"
@@ -80,8 +80,8 @@ const AddressForm = ({ cart }) => {
             )}
           </div>
         </div>
-        <div className="flex max-w-3xl mt-6">
-          <div className="flex flex-col w-1/2">
+        <div className="flex max-w-3xl mt-6 flex-col sm:flex-row">
+          <div className="flex flex-col w-full sm:w-1/2">
             <label htmlFor="address">Address*</label>
             <input
               className="border-b-2"
@@ -93,7 +93,7 @@ const AddressForm = ({ cart }) => {
               <p className="text-red-400 font-bold">Address is required.</p>
             )}
           </div>
-          <div className="flex flex-col ml-4 w-1/2">
+          <div className="flex flex-col sm:ml-4 w-full sm:w-1/2 mt-4 sm:mt-0">
             <label htmlFor="email">Email*</label>
             <input
               className="border-b-2"
@@ -115,7 +115,7 @@ const AddressForm = ({ cart }) => {
           </div>
         </div>
         <div className="flex max-w-3xl mt-6">
-          <div className="flex flex-col w-1/2">
+          <div className="flex flex-col w-1/2 sm:w-1/2 mr-2 sm:mr-0">
             <label htmlFor="city">City*</label>
             <input
               className="border-b-2"
@@ -127,7 +127,7 @@ const AddressForm = ({ cart }) => {
               <p className="text-red-400 font-bold">City is required.</p>
             )}
           </div>
-          <div className="flex flex-col ml-4 w-1/2">
+          <div className="flex flex-col sm:ml-4 w-1/2 sm:w-1/2">
             <label htmlFor="zip">Zip / Postal code*</label>
             <input
               className="border-b-2"
@@ -140,8 +140,8 @@ const AddressForm = ({ cart }) => {
             )}
           </div>
         </div>
-        <div className="flex justify-between">
-          <div className="flex flex-col w-1/2 mt-6">
+        <div className="flex justify-between flex-row sm:flex-row">
+          <div className="flex flex-col mt-6 w-1/2 sm:w-1/2 mr-2">
             <label htmlFor="shipping">Shipping Country*</label>
             <select
               value={shipping.shippingCountry}
@@ -151,11 +151,13 @@ const AddressForm = ({ cart }) => {
               ref={register({ required: true })}
             >
               {Object.keys(shipping.shippingCountries).map((country, index) => (
-                <option key={index} value={country}>{country}</option>
+                <option key={index} value={country}>
+                  {country}
+                </option>
               ))}
             </select>
           </div>
-          <div className="flex flex-col w-1/2 mt-6 ml-4">
+          <div className="flex flex-col mt-6  w-1/2 sm:w-1/2">
             <label htmlFor="shipping">Shipping Subdivisions*</label>
             <select
               value={shipping.shippingSubdivision}
@@ -166,9 +168,13 @@ const AddressForm = ({ cart }) => {
               name="subdivision"
               ref={register({ required: true })}
             >
-              {Object.keys(shipping.shippingSubdivisions).map((subdivision, index) => (
-                <option key={index} value={subdivision}>{subdivision}</option>
-              ))}
+              {Object.keys(shipping.shippingSubdivisions).map(
+                (subdivision, index) => (
+                  <option key={index} value={subdivision}>
+                    {subdivision}
+                  </option>
+                )
+              )}
             </select>
           </div>
         </div>

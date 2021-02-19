@@ -8,7 +8,7 @@ const CartItem = ({ cart }) => {
   const dispatch = useDispatch();
 
   return (
-    <div className="grid grid-cols-3 gap-36">
+    <div className="px-4 md:px-0 mx-auto py-20 grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-10 lg:grid-cols-3 lg:gap-14">
       {cart?.line_items?.map((item) => (
         <div key={item.id} className="shadow-xl rounded-md">
           <div className="rounded-t-md relative grid justify-center bg-white">
