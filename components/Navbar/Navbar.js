@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faShoppingBag } from "@fortawesome/free-solid-svg-icons";
 
 const Navbar = () => {
   const { cart } = useSelector((state) => state.cart);
@@ -18,7 +19,9 @@ const Navbar = () => {
     <nav className="navbar py-6 shadow-2xl" style={{ background: "#242730" }}>
       <div className="container px-4 md:px-0 mx-auto md:flex md:justify-between md:items-center">
         <div className="wrapper flex items-center justify-between">
-          <h1 className="text-white font-bold text-lg">ReduxShoppingApp</h1>
+          <Link href="/">
+            <a className="text-white font-bold text-lg">ReduxShoppingApp</a>
+          </Link>
           <div className="md:hidden">
             <FontAwesomeIcon
               onClick={() => setToggleNav(!toggleNav)}
@@ -31,7 +34,7 @@ const Navbar = () => {
           className={
             toggleNav
               ? "flex flex-col md:flex md:flex-row"
-              : "hidden md:flex md:flex-row"
+              : "hidden md:flex md:flex-row items-center"
           }
         >
           <li className="md:mx-3 lg:px-4 my-2">
@@ -45,19 +48,23 @@ const Navbar = () => {
           <li className="md:mx-3 lg:px-4 my-2">
             <a className="text-white">Services</a>
           </li>
-          <div className="flex items-center">
-            <li className="md:mx-3 lg:px-4 my-2 mr-2 md:mr-1">
-              <Link href="/cart">
-                <a className="text-white">Cart</a>
-              </Link>
-            </li>
-            <span className="rounded-full h-4 w-4 p-3 bg-white text-black font-bold flex justify-center items-center">
-              {/* When a user  adds an item to the cart, the cart object has multiple nested cart objects which is implemented by the API. Once the user goes to the cart page, the cart object changes */}
-              {cart?.cart?.total_items
-                ? cart?.cart?.total_items
-                : cart?.total_items}
-            </span>
-          </div>
+          <li className="md:ml-3 lg:pl-4 my-2">
+            <Link href="/cart">
+              <a className="text-white flex items-center relative">
+              <FontAwesomeIcon
+                icon={faShoppingBag}
+                size="lg"
+                className="block"
+              />
+                <span className="rounded-full h-5 w-5 text-black bg-white font-bold flex justify-center items-center text-sm absolute top-0 left-3">
+                  {/* When a user  adds an item to the cart, the cart object has multiple nested cart objects which is implemented by the API. Once the user goes to the cart page, the cart object changes */}
+                  {cart?.cart?.total_items
+                    ? cart?.cart?.total_items
+                    : cart?.total_items}
+                </span>
+              </a>
+            </Link>
+          </li>
         </ul>
       </div>
     </nav>
@@ -65,5 +72,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-
-<i class="fas fa-bars"></i>;
