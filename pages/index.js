@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // Redux Actions
 import { fetchProducts } from "../redux/actions/fetchProducts/fetchProducts";
@@ -9,7 +9,6 @@ import Navbar from "../components/Navbar/Navbar";
 import Products from "../components/Products/Products";
 
 const Home = () => {
-  const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
 
   useEffect(() => {
