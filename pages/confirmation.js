@@ -17,7 +17,7 @@ const confirmationPage = () => {
           </p>
           <div className="flex justify-center">
             <Link href="/">
-              <a>Return Home</a>
+              <a className="underline">Return Home</a>
             </Link>
           </div>
         </div>

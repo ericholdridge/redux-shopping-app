@@ -10,6 +10,8 @@ import { fetchShippingMethods } from "../../redux/actions/shipping/fetchShipping
 import { updateShippingSubdivision } from "../../redux/actions/shipping/updateShippingDivision";
 import { fetchShippingFormData } from "../../redux/actions/shipping/fetchShippingFormData";
 import { updateShippingOption } from "../../redux/actions/shipping/updateShippingOption";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
 
 const AddressForm = ({ cart }) => {
   const router = useRouter();
@@ -25,7 +27,7 @@ const AddressForm = ({ cart }) => {
 
   const onSubmit = (data) => {
     dispatch(fetchShippingFormData(data));
-    router.push("/checkout/step2");
+    router.push("/payment");
   };
 
   useEffect(() => {
@@ -48,7 +50,7 @@ const AddressForm = ({ cart }) => {
   }, [shipping.shippingSubdivision]);
 
   return (
-    <div className="container mx-auto sm:pt-4 px-4 sm:px-0">
+    <div className="container mx-auto sm:pt-4 px-4 sm:px-0 mt-10">
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="rounded mx-auto shadow-xl p-4 max-w-3xl bg-white"

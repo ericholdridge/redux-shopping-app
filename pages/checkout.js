@@ -1,21 +1,22 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { generateCheckoutToken } from "../../redux/actions/checkout/generateCheckoutToken/generateCheckoutToken";
-import AddressForm from "./AddressForm";
+import Navbar from "../components/Navbar/Navbar";
+import AddressForm from "../components/Checkout/AddressForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleNotch } from "@fortawesome/free-solid-svg-icons";
+import { generateCheckoutToken } from "../redux/actions/checkout/generateCheckoutToken/generateCheckoutToken";
 
-const Form1 = () => {
+const checkout = () => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart);
 
   useEffect(() => {
-    dispatch(generateCheckoutToken(cart.cart.id));
+    dispatch(generateCheckoutToken(cart.cart?.id));
   }, []);
 
   return (
-    <section className="checkout min-h-screen bg-gray-100 flex justify-center">
-      {/* Make sure there is a token first, if not show a spinner/loading icon */}
+    <div>
+      <Navbar />
       {cart.token.id ? (
         <AddressForm cart={cart} />
       ) : (
@@ -26,8 +27,8 @@ const Form1 = () => {
           className="block"
         />
       )}
-    </section>
+    </div>
   );
 };
 
-export default Form1;
+export default checkout;

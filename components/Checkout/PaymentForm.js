@@ -11,6 +11,8 @@ import { handleCaptureCheckout } from "../../redux/actions/checkout/generateChec
 import Link from "next/link";
 
 const PaymentForm = () => {
+  const [errorMessage, setErrorMessage] = useState();
+  const [showPayButton, setShowPayButton] = useState(false);
   const router = useRouter();
   const [stripePromise, setStripePromise] = useState(() =>
     loadStripe(process.env.NEXT_PUBLIC_STRIPE_KEY)
@@ -33,7 +35,7 @@ const PaymentForm = () => {
     });
 
     if (error) {
-      console.log(error);
+      console.log(error.message);
     } else {
       const orderData = {
         line_items: cart.token.live.line_items,
@@ -58,13 +60,29 @@ const PaymentForm = () => {
       };
       dispatch(handleCaptureCheckout(cart.token.id, orderData));
     }
-    // Take the user to the confirmation page
     router.push("/confirmation");
+  };
+
+  const handleOnChange = (e) => {
+    if (e.empty) {
+      setErrorMessage("");
+    } else if (e.complete) {
+      setShowPayButton(true);
+      setErrorMessage("");
+      // router.push("/confirmation");
+    } else if (e.error) {
+      // Show error message to the user
+      setShowPayButton(false);
+      setErrorMessage(e.error.message);
+    } 
+    else if (e.complete === false) {
+      setShowPayButton(false);
+    }
   };
 
   return (
     <section className="min-h-screen bg-gray-100">
-      <div className="container mx-auto px-4 sm:px-0">
+      <div className="container mx-auto px-4 sm:px-0 py-20">
         <div className="max-w-xl mx-auto shadow-2xl p-4 rounded-md bg-white">
           <h1 className="font-bold mb-4 text-2xl">Order Summary</h1>
           {cart.cart?.line_items?.map((item, index) => (
@@ -89,20 +107,27 @@ const PaymentForm = () => {
                   onSubmit={(e) => handleSubmit(e, elements, stripe)}
                   className="mt-2"
                 >
-                  <CardElement />
+                  <CardElement onChange={(e) => handleOnChange(e)} />
+                  {errorMessage && (
+                    <div className="mt-2">
+                      <p className="text-red-500 font-medium">{errorMessage}</p>
+                    </div>
+                  )}
                   <div className="flex justify-between pt-4">
-                    <Link href="/checkout/step1">
+                    <Link href="/checkout">
                       <a className="bg-black px-4 py-1 text-white rounded shadow">
                         Back
                       </a>
                     </Link>
-                    <button
-                      disabled={!stripe}
-                      className="bg-green-400 px-4 py-1 rounded shadow"
-                      type="submit"
-                    >
-                      Pay {cart.token?.live?.subtotal.formatted_with_symbol}
-                    </button>
+                    {showPayButton ? (
+                      <button
+                        disabled={!stripe}
+                        className="bg-green-400 px-4 py-1 rounded shadow"
+                        type="submit"
+                      >
+                        Pay {cart.token?.live?.subtotal.formatted_with_symbol}
+                      </button>
+                    ) : null}
                   </div>
                 </form>
               )}
