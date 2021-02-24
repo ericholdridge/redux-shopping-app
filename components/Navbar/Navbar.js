@@ -33,30 +33,30 @@ const Navbar = () => {
         <ul
           className={
             toggleNav
-              ? "flex flex-col md:flex md:flex-row"
+              ? "flex flex-col md:flex md:flex-row md:items-center"
               : "hidden md:flex md:flex-row items-center"
           }
         >
-          <li className="md:mx-3 lg:px-4 my-2">
+          <li className="md:mx-6 lg:px-4 my-2">
             <Link href="/">
               <a className="text-white">Products</a>
             </Link>
           </li>
-          <li className="md:mx-3 lg:px-4 my-2">
+          <li className="md:mx-6 lg:px-4 my-2">
             <a className="text-white">About</a>
           </li>
-          <li className="md:mx-3 lg:px-4 my-2">
+          <li className="md:ml-6 lg:px-4 my-2">
             <a className="text-white">Services</a>
           </li>
-          <li className="md:ml-3 lg:pl-4 my-2">
+          <li className="md:ml-10 lg:pl-4 my-2">
             <Link href="/cart">
-              <a className="text-white flex items-center relative">
+              <a className="text-white flex items-center relative text-4xl">
               <FontAwesomeIcon
                 icon={faShoppingBag}
-                size="lg"
+                size="sm"
                 className="block"
               />
-                <span className="rounded-full h-5 w-5 text-black bg-white font-bold flex justify-center items-center text-sm absolute top-0 left-3">
+                <span className="h-5 w-5 text-black bg-white font-bold flex justify-center items-center text-sm absolute top-3 left-1">
                   {/* When a user  adds an item to the cart, the cart object has multiple nested cart objects which is implemented by the API. Once the user goes to the cart page, the cart object changes */}
                   {cart?.cart?.total_items
                     ? cart?.cart?.total_items
